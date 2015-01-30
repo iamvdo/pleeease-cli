@@ -1,0 +1,44 @@
+{
+  "name": "pleeease-cli",
+  "version": "3.0.0",
+  "description": "Process CSS with ease",
+  "author": {
+    "name": "Vincent De Oliveira"
+  },
+  "main": "./lib/cli",
+  "bin": {
+    "pleeease": "./bin/pleeease",
+    "pleeease-compile": "./bin/pleeease-compile",
+    "pleeease-watch": "./bin/pleeease-watch"
+  },
+  "keywords": [
+    "postprocessor",
+    "css",
+    "postcss",
+    "pleeease"
+  ],
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamvdo/pleeease-cli"
+  },
+  "dependencies": {
+    "chokidar": "~0.8.2",
+    "cli-color": "~0.3.2",
+    "commander": "~2.2.0",
+    "mkdirp": "~0.4.0",
+    "multi-glob": "~0.4.0"
+  },
+  "devDependencies": {
+    "gulp": "3.8.6",
+    "gulp-jshint": "~1.7.1",
+    "jshint-stylish": "~0.4.0",
+    "gulp-bump": "~0.1.10",
+    "yargs": "~1.2.6",
+    "mocha": "~1.20.1",
+    "should": "4.0.4",
+    "gulp-mocha": "~0.5.1"
+  }
+}

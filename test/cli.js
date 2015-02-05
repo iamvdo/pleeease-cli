@@ -103,7 +103,7 @@ describe('CLI', function () {
   it('returns error when no files are found', function (done) {
     remove = false;
     exec(bin + ' compile ' + __dirname__ + 'not-found.css', function (err, stdout, stderr) {
-      (stderr.indexOf('File(s) not found') !== -1).should.be.true;
+      (trim(stdout).indexOf('File(s) not found') !== -1).should.be.true;
       done();
       }
     );

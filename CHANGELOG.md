@@ -1,3 +1,8 @@
+3.2.0 - 2015-02-16
+
+* Match Pleeease 3.2.0
+* Fixed installation problem with Node.js 0.12
+
 3.1.0 - 2015-02-10
 
 * Match Pleeease 3.1.0

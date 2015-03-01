@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var options = require('pleeease')().defaults;
+var CLI     = require('../lib/cli');
 var json    = require('../package.json');
 var version;
 for (var key in json) {
@@ -11,10 +11,12 @@ for (var key in json) {
     }
 }
 
+var cli = new CLI();
+
 program.
     version(version).
-    command('compile [file...]', 'compile one more files (default: "' + options.in + '")').
-    command('watch [file...]', 'watch for changes and compile (default: "' + options.in + '")').
+    command('compile [file...]', 'compile one more files (default: "' + cli.defaults.in + '")').
+    command('watch [file...]', 'watch for changes and compile (default: "' + cli.defaults.in + '")').
     parse(process.argv);
 
 if (process.argv.length === 2) {

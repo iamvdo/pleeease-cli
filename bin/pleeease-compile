@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-var CLI       = require('../lib/cli'),
-    options   = require('pleeease')().defaults,
-    program   = require('commander');
+var CLI       = require('../lib/cli');
+var program   = require('commander');
+
+var cli = new CLI();
 
 program.
-    option('-t, to [file]', 'save compiled files to [file] (default: "' + options.out + '")', options.out).
+    option('-t, to [file]', 'save compiled files to [file] (default: "' + cli.defaults.out + '")', cli.defaults.out).
     parse(process.argv);
 
 var files = program.args;
 
 if (!files.length) {
-    files = options.in;
+    files = cli.defaults.in;
 };
 
 var inputs = files,
     output = program.to;
 
-var cli = new CLI();
-    cli.init('compile', inputs, output);
+cli.init('compile', inputs, output);

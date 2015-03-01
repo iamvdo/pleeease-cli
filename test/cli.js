@@ -1,7 +1,8 @@
 'use strict';
 
-var CLI        = require('../lib/cli'),
-    Logger     = require('../lib/logger');
+var CLI      = require('../lib/cli');
+var Pleeease = require('pleeease');
+var Logger   = require('../lib/logger');
 
 var fs         = require('fs'),
     path       = require('path'),
@@ -31,11 +32,8 @@ describe('CLI', function () {
   var cli, options, remove;
 
   beforeEach(function() {
-
     cli     = new CLI();
-    options = cli.options;
     remove  = true;
-
   });
 
   afterEach(function() {
@@ -44,10 +42,20 @@ describe('CLI', function () {
     }
   });
 
-  it('extends options', function(done) {
-    cli.options.should.eql(options);
+  it('uses default in and out', function () {
+    //cli.defaults
+    remove = false;
+  });
+
+  it('stores pleeease object', function(done) {
+    var processor = new Pleeease();
+    cli.pleeease.should.be.eql(processor);
     remove = false;
     done();
+  });
+
+  it('adds in and out files to options', function () {
+    remove = false;
   });
 
   it('reads from input file and write to output file', function(done) {
@@ -75,10 +83,10 @@ describe('CLI', function () {
     exec(bin + ' compile '+ __in__, function (err, stdout) {
       if (err) return done(err);
       var input  = readFile(__in__);
-      var output = readFile(options.out);
+      var output = readFile(cli.defaults.out);
       output.should.be.eql(input);
       // remove default output file
-      out = options.out;
+      out = cli.defaults.out;
       done();
     });
   });

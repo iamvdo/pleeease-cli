@@ -42,19 +42,9 @@ describe('CLI', function () {
     }
   });
 
-  it('uses default in and out', function () {
-    //cli.defaults
-    remove = false;
-  });
-
-  it('stores pleeease object', function(done) {
+  it('stores pleeease object', function() {
     var processor = new Pleeease();
     cli.pleeease.should.be.eql(processor);
-    remove = false;
-    done();
-  });
-
-  it('adds in and out files to options', function () {
     remove = false;
   });
 

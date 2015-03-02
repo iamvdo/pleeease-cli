@@ -98,6 +98,24 @@ describe('CLI', function () {
     });
   });
 
+  it('writes sourcemaps', function (done) {
+    // create a .pleeeaserc file
+    var json = '{"in": ["in.css"], "out": "out", "sourcemaps": {"map": {"inline": false}}}';
+    var pleeeaseRC = fs.writeFileSync(__dirname__ + '.pleeeaserc', json);
+    exec('cd ' + __dirname__ + ' && node ../../bin/pleeease compile', function (err, stdout) {
+      if (err) return done(err);
+      var output = readFile(__out__ + '.map');
+      output.should.be.ok;
+      // remove .pleeeaserc file
+      removeFile(__dirname__ + '.pleeeaserc');
+      // remove sourcemaps
+      removeFile(__out__ + '.map');
+      // remove output file
+      out = __out__;
+      done();
+    });
+  });
+
   it('returns error when no files are found', function (done) {
     remove = false;
     exec(bin + ' compile ' + __dirname__ + 'not-found.css', function (err, stdout, stderr) {

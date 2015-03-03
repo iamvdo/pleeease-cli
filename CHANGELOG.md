@@ -1,3 +1,9 @@
+3.2.1 - 2015-03-03
+
+* Pleeease 3.2.1
+* Fixed:
+  * Write sourcemap file if inline: false
+
 3.2.0 - 2015-02-16
 
 * Match Pleeease 3.2.0

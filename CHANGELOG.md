@@ -1,3 +1,8 @@
+3.2.2 - 2015-03-10
+
+* Fixed:
+  * Add deep-extend as a dependency
+
 3.2.1 - 2015-03-03
 
 * Pleeease 3.2.1

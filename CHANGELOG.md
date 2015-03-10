@@ -1,7 +1,10 @@
+3.2.3 - 2015-03-10
+
+* Fixed: test sourcemaps.map before use
+
 3.2.2 - 2015-03-10
 
-* Fixed:
-  * Add deep-extend as a dependency
+* Fixed: add deep-extend as a dependency
 
 3.2.1 - 2015-03-03
 

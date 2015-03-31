@@ -48,6 +48,15 @@ describe('CLI', function () {
     remove = false;
   });
 
+  it('returns versions', function (done) {
+    remove = false;
+    exec(bin + ' -V', function (err, stdout) {
+      if (err) return done(err);
+      (stdout.search(/^pleeease-cli\s+[0-9]+.[0-9]+.[0-9]+\npleeease\s+[0-9]+.[0-9]+.[0-9]+/) !== -1).should.be.true;
+      done();
+    });
+  });
+
   it('reads from input file and write to output file', function(done) {
     exec(bin + ' compile '+ __in__ + ' to '+ __out__, function (err, stdout) {
       if (err) return done(err);

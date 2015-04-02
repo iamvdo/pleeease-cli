@@ -1,3 +1,8 @@
+3.2.4 - 2015-04-02
+
+* Fixed: use from and to from ClI and copy to sourcemaps
+* Fixed: `-v` returns also version of Pleeease
+
 3.2.3 - 2015-03-10
 
 * Fixed: test sourcemaps.map before use

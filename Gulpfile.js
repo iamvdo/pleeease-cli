@@ -30,7 +30,6 @@ gulp.task('lint', ['lint:lib', 'lint:tests']);
  *
  */
 gulp.task('test', function () {
-    require('should');
     var mocha = require('gulp-mocha');
     var args = require('yargs').argv;
     var file = args.file || '*';

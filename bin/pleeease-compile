@@ -1,21 +1,13 @@
 #!/usr/bin/env node
 
-var CLI       = require('../lib/cli');
-var program   = require('commander');
+var CLI      = require('../lib/cli');
 
-var cli = new CLI();
-
+var program  = require('commander');
 program.
-    option('-t, to [file]', 'save compiled files to [file] (default: "' + cli.defaults.out + '")', cli.defaults.out).
+    option('-t, to [file]', 'save compiled files to [file] (default: "app.min.css")').
     parse(process.argv);
 
-var files = program.args;
+var inputs = program.args;
+var output = program.to;
 
-if (!files.length) {
-    files = cli.defaults.in;
-};
-
-var inputs = files,
-    output = program.to;
-
-cli.init('compile', inputs, output);
+var cli = new CLI(inputs, output).compile();

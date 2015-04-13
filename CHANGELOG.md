@@ -1,3 +1,10 @@
+3.2.5 - 2015-04-13
+
+* Fixed: watch only inputs files (#2)
+* Fixed: better handle inputs and output files
+* Changed: internal process
+* Added: some tests
+
 3.2.4 - 2015-04-02
 
 * Fixed: use from and to from ClI and copy to sourcemaps

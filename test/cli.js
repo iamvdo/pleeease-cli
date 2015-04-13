@@ -92,6 +92,23 @@ describe('cli', function () {
     fs.unlinkSync('.pleeeaserc');
   });
 
+  it('extends array of files from .pleeeaserc', function () {
+    var json = '{"in": ["in.css", "in2.css"], "out": "out.css"}';
+    fs.writeFileSync('.pleeeaserc', json);
+
+    // no files in CLI
+    cli = new CLI();
+    cli.files.inputs.should.eql(['in.css', 'in2.css']);
+    cli.files.output.should.eql('out.css');
+
+    // files in CLI
+    cli = new CLI('a.css', 'b.css');
+    cli.files.inputs.should.eql(['in.css', 'in2.css']);
+    cli.files.output.should.eql('out.css');
+
+    fs.unlinkSync('.pleeeaserc');
+  });
+
   it('copies output file in sourcemaps.to', function () {
     var json = '{"sourcemaps": true}';
     fs.writeFileSync('.pleeeaserc', json);

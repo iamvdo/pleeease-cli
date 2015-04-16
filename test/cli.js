@@ -222,6 +222,27 @@ describe('cli', function () {
 
   });
 
+  describe('#ignoredWatch', function () {
+
+    it('ignores files', function () {
+      cli = new CLI('*.css');
+      var ignored = cli.ignoredWatch('out.css');
+      // not ignored
+      (ignored('in.css') === null).should.be.ok;
+      (ignored('in.scss') === null).should.be.ok;
+      (ignored('in.less') === null).should.be.ok;
+      (ignored('in.styl') === null).should.be.ok;
+      (ignored('_in.css') === null).should.be.ok;
+      (ignored('dir/in.css') === null).should.be.ok;
+      // ignored
+      (ignored('out.css') === null).should.not.be.ok;
+      (ignored('.pleeeaserc') === null).should.not.be.ok;
+      (ignored('file.txt') === null).should.not.be.ok;
+      (ignored('file.css.txt') === null).should.not.be.ok;
+    });
+
+  });
+
   describe('real use-cases', function () {
 
     var bin  = 'node ' + path.resolve(__dirname, '../bin/pleeease');

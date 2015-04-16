@@ -1,3 +1,7 @@
+3.2.6 - 2015-04-16
+
+* Fixed: watch all files, but ignore non-CSS ones (in case of imports)
+
 3.2.5 - 2015-04-13
 
 * Fixed: watch only inputs files (#2)

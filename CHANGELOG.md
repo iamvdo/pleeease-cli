@@ -1,3 +1,8 @@
+3.2.7 - 2015-04-27
+
+* Fixed: print compilation errors instead of throwing them
+* Fixed: get only CSS files from directory
+
 3.2.6 - 2015-04-16
 
 * Fixed: watch all files, but ignore non-CSS ones (in case of imports)

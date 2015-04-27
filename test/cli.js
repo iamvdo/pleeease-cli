@@ -44,19 +44,6 @@ describe('cli', function () {
     var to = setTimeout(finish, 1500);
   }
 
-  it('get files', function () {
-    cli = new CLI('in.css', 'out.css');
-    cli.files.inputs.should.eql(['in.css']);
-    cli.files.output.should.eql('out.css');
-  });
-
-  it('get files, using default output', function () {
-    cli = new CLI('in.css');
-    cli.files.should.be.an.instanceOf(Object);
-    cli.files.inputs.should.eql(['in.css']);
-    cli.files.output.should.eql('app.min.css');
-  });
-
   it('returns error when no inputs files', function () {
     sinon.stub(console, 'log');
     try {
@@ -68,6 +55,19 @@ describe('cli', function () {
       console.log.restore();
       throw err;
     }
+  });
+
+  it('get files', function () {
+    cli = new CLI('in.css', 'out.css');
+    cli.files.inputs.should.eql(['in.css']);
+    cli.files.output.should.eql('out.css');
+  });
+
+  it('get files, using default output', function () {
+    cli = new CLI('in.css');
+    cli.files.should.be.an.instanceOf(Object);
+    cli.files.inputs.should.eql(['in.css']);
+    cli.files.output.should.eql('app.min.css');
   });
 
   it('get globby files', function () {

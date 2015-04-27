@@ -75,6 +75,11 @@ describe('cli', function () {
     cli.files.inputs.should.eql(['in.css', 'in2.css']);
   });
 
+  it('get files in directory', function () {
+    cli = new CLI('dir');
+    cli.files.inputs.should.eql(['dir/in.css']);
+  });
+
   it('extends files from .pleeeaserc', function () {
     var json = '{"in": "in.css", "out": "out.css"}';
     fs.writeFileSync('.pleeeaserc', json);

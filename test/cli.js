@@ -156,11 +156,16 @@ describe('cli', function () {
 
   describe('#compile', function () {
 
+    var remove;
+
     beforeEach(function () {
+      remove = true;
       sinon.stub(console, 'log');
     });
     afterEach(function () {
-      removeFile('app.min.css');
+      if (remove) {
+        removeFile('app.min.css');
+      }
       cli.compile.restore();
     });
 
@@ -187,6 +192,35 @@ describe('cli', function () {
         cli.compile.thisValues[0].fixed.should.be.eql('.in{color:#FFF}.in2{color:#000}');
         console.log.should.have.been.calledOnce;
         console.log.should.have.been.calledWithMatch('Compile 2 file(s) [in.css,in2.css] to app.min.css');
+        console.log.restore();
+      } catch (err) {
+        console.log.restore();
+        throw err;
+      }
+    });
+
+    it('compiles one specific file (watched)', function () {
+      cli = new CLI('in.css');
+      sinon.spy(cli, 'compile');
+      try {
+        cli.compile('in.css');
+        console.log.should.have.been.calledOnce;
+        console.log.firstCall.should.have.been.calledWithMatch('Recompiled file in.css');
+        console.log.restore();
+      } catch (err) {
+        console.log.restore();
+        throw err;
+      }
+    });
+
+    it('log errors when compile', function () {
+      remove = false;
+      cli = new CLI('error/error.css');
+      sinon.spy(cli, 'compile');
+      try {
+        cli.compile();
+        console.log.should.have.been.calledOnce;
+        console.log.should.have.been.calledWithMatch('Compilation error');
         console.log.restore();
       } catch (err) {
         console.log.restore();
@@ -257,7 +291,7 @@ describe('cli', function () {
     var input2  = 'in2.css';
     var output  = 'out';
     var defaultOutput = 'app.min.css';
-    
+
     var remove;
 
     beforeEach(function() {

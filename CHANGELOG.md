@@ -1,3 +1,7 @@
+3.2.8 - 2015-05-28
+
+* Fixed: fix Pleeease's version dependency
+
 3.2.7 - 2015-04-27
 
 * Fixed: print compilation errors instead of throwing them

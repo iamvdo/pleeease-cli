@@ -131,12 +131,12 @@ describe('cli', function () {
   });
 
   it('extends options from .pleeeaserc', function () {
-    var json = '{"minifier": false, "rem": ["10px"]}';
+    var json = '{"minifier": false, "rem": {"rootValue": "10px"}}';
     fs.writeFileSync('.pleeeaserc', json);
 
     cli = new CLI('in.css');
     cli.pleeease.options.minifier.should.eql(false);
-    cli.pleeease.options.rem.should.eql(['10px']);
+    cli.pleeease.options.rem.should.eql({rootValue: "10px"});
 
     fs.unlinkSync('.pleeeaserc');
   });
@@ -169,34 +169,48 @@ describe('cli', function () {
       cli.compile.restore();
     });
 
-    it('compiles', function () {
+    it('compiles', function (done) {
       cli = new CLI('in.css');
       sinon.spy(cli, 'compile');
-      try {
-        cli.compile();
-        cli.compile.thisValues[0].fixed.should.be.eql('.in{color:#FFF}');
-        console.log.should.have.been.calledOnce;
-        console.log.should.have.been.calledWithMatch('Compile 1 file(s) [in.css] to app.min.css');
-        console.log.restore();
-      } catch (err) {
-        console.log.restore();
-        throw err;
-      }
+      var p = Promise.resolve(cli)
+        .then(function (r) {
+          cli.compile();
+          return cli._compile(cli.files.inputs, cli.files.output);
+        })
+        .then(function (result) {
+          result.should.be.eql('.in{color:#FFF}');
+          console.log.should.have.been.calledOnce;
+          console.log.should.have.been.calledWithMatch('Compile 1 file(s) [in.css] to app.min.css');
+          console.log.restore();
+          done();
+        })
+        .catch(function (err) {
+          console.log.restore();
+          throw err;
+        })
+        .catch(done);
     });
 
-    it('compiles multiple', function () {
+    it('compiles multiple', function (done) {
       cli = new CLI(['in.css', 'in2.css']);
       sinon.spy(cli, 'compile');
-      try {
-        cli.compile();
-        cli.compile.thisValues[0].fixed.should.be.eql('.in{color:#FFF}.in2{color:#000}');
-        console.log.should.have.been.calledOnce;
-        console.log.should.have.been.calledWithMatch('Compile 2 file(s) [in.css,in2.css] to app.min.css');
-        console.log.restore();
-      } catch (err) {
-        console.log.restore();
-        throw err;
-      }
+      var p = Promise.resolve(cli)
+        .then(function (r) {
+          cli.compile();
+          return cli._compile(cli.files.inputs, cli.files.output);
+        })
+        .then(function (result) {
+          result.should.be.eql('.in{color:#FFF}.in2{color:#000}');
+          console.log.should.have.been.calledOnce;
+          console.log.should.have.been.calledWithMatch('Compile 2 file(s) [in.css,in2.css] to app.min.css');
+          console.log.restore();
+          done();
+        })
+        .catch(function (err) {
+          console.log.restore();
+          throw err;
+        })
+        .catch(done);
     });
 
     it('compiles one specific file (watched)', function () {

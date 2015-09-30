@@ -1,3 +1,7 @@
+4.0.0 - 2015-09-30
+
+* Use [Pleeease 4.0.0](https://github.com/iamvdo/pleeease/releases/tag/4.0.0)
+
 3.2.8 - 2015-05-28
 
 * Fixed: fix Pleeease's version dependency

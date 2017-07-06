@@ -308,6 +308,9 @@ describe('cli', function () {
 
     var remove;
 
+    // increase default timeout for these since travis can be slow
+    this.timeout(3000);
+
     beforeEach(function() {
       remove = true;
     });

@@ -1,3 +1,7 @@
+4.1.0 - 2017-07-07
+
+* Update Chokidar to support Node.js 7
+
 4.0.0 - 2015-09-30
 
 * Use [Pleeease 4.0.0](https://github.com/iamvdo/pleeease/releases/tag/4.0.0)
